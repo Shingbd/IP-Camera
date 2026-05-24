@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/shingbd/workspace/集创赛/read_usb/build",
+  "command": "/usr/bin/c++  -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/include/opencv4 -I/usr/local/include/gstreamer-1.0 -pthread -o CMakeFiles/cam.dir/cam.cpp.o -c /Users/shingbd/workspace/集创赛/read_usb/cam.cpp",
+  "file": "/Users/shingbd/workspace/集创赛/read_usb/cam.cpp"
+}
+]

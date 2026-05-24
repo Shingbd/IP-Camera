@@ -1,0 +1,3 @@
+/Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles/cam.dir
+/Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles/edit_cache.dir
+/Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles/rebuild_cache.dir
