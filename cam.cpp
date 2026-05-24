@@ -22,6 +22,9 @@
 
 static char *port = (char *) DEFAULT_RTSP_PORT;
 
+constexpr int FRAME_W = 640;
+constexpr int FRAME_H = 480;
+
 static GOptionEntry entries[] = {
     {"port", 'p', 0, G_OPTION_ARG_STRING, &port,
         "Port to listen on (default: " DEFAULT_RTSP_PORT ")", "PORT"},
@@ -54,8 +57,8 @@ static void media_configure_cb(GstRTSPMediaFactory *factory, GstRTSPMedia *media
 
     GstCaps *caps = gst_caps_new_simple("video/x-raw",
         "format", G_TYPE_STRING, "BGR",
-        "width", G_TYPE_INT, 640,
-        "height", G_TYPE_INT, 480,
+        "width", G_TYPE_INT, FRAME_W,
+        "height", G_TYPE_INT, FRAME_H,
         NULL);
     gst_app_src_set_caps(GST_APP_SRC(appsrc), caps);
     gst_caps_unref(caps);
@@ -107,6 +110,8 @@ int main(int argc, char *argv[])
 
     const std::string camera_path = "/dev/video10";
     const std::string IP = get_local_ip();
+    const std::string W = std::to_string(FRAME_W);
+    const std::string H = std::to_string(FRAME_H);
 
     if (access(camera_path.c_str(), R_OK) != 0) {
         std::cerr << "ERROR: " << camera_path << " not accessible!" << std::endl;
@@ -142,7 +147,7 @@ int main(int argc, char *argv[])
     // ── 管道 2: 本地显示 ──
     const std::string display_pipe =
         "appsrc name=local_src is-live=true format=time ! "
-        "video/x-raw,format=BGR,width=640,height=480 ! "
+        "video/x-raw,format=BGR,width=" + W + ",height=" + H + " ! "
         "videoconvert ! "
         "autovideosink sync=false";
 
@@ -161,8 +166,8 @@ int main(int argc, char *argv[])
 
     GstCaps *caps = gst_caps_new_simple("video/x-raw",
         "format", G_TYPE_STRING, "BGR",
-        "width", G_TYPE_INT, 640,
-        "height", G_TYPE_INT, 480,
+        "width", G_TYPE_INT, FRAME_W,
+        "height", G_TYPE_INT, FRAME_H,
         NULL);
     gst_app_src_set_caps(GST_APP_SRC(local_src), caps);
     gst_caps_unref(caps);
@@ -211,7 +216,7 @@ int main(int argc, char *argv[])
 
     std::string launch =
         "( appsrc name=source is-live=true format=time ! "
-        "video/x-raw,format=BGR,width=640,height=480 ! "
+        "video/x-raw,format=BGR,width=" + W + ",height=" + H + " ! "
         "videoconvert ! video/x-raw,format=I420 ! "
         "x264enc tune=zerolatency bitrate=2000 ! "
         "rtph264pay name=pay0 pt=96 )";
@@ -278,7 +283,7 @@ int main(int argc, char *argv[])
                 }
             }
 
-            int w = 640, h = 480;
+            int w = FRAME_W, h = FRAME_H;
             std::string fmt_str = "?";
             if (caps) {
                 GstStructure *s = gst_caps_get_structure(caps, 0);
