@@ -1066,6 +1066,9 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
   /usr/include/c++/11/bits/allocated_ptr.h \
   /usr/include/c++/11/ext/aligned_buffer.h \
   /usr/include/c++/11/bits/list.tcc \
+  /usr/include/c++/11/atomic \
+  /usr/include/c++/11/bits/atomic_base.h \
+  /usr/include/c++/11/bits/atomic_lockfree_defines.h \
   ../3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/yolov8-pose.h \
   ../3rdpart/rknn_model_zoo/3rdparty/rknpu2/include/rknn_api.h \
   ../3rdpart/rknn_model_zoo/utils/common.h \
@@ -1079,6 +1082,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
   ../3rdpart/rknn_model_zoo/utils/common.h \
   ../3rdpart/rknn_model_zoo/utils/image_drawing.h
 
+
+/usr/include/c++/11/bits/atomic_lockfree_defines.h:
 
 /usr/include/c++/11/bits/list.tcc:
 
@@ -1213,6 +1218,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/glib-2.0/gio/gsimpleaction.h:
 
 /usr/include/glib-2.0/gio/gseekable.h:
+
+/usr/include/c++/11/bits/atomic_base.h:
 
 /usr/include/glib-2.0/gio/gresolver.h:
 
@@ -1359,6 +1366,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/aarch64-linux-gnu/bits/posix1_lim.h:
 
 /usr/include/c++/11/bits/stl_algo.h:
+
+/usr/include/c++/11/atomic:
 
 /usr/include/asm-generic/int-ll64.h:
 
