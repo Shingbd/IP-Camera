@@ -12,6 +12,10 @@
 #include <mutex>
 #include <list>
 
+#include "yolov8-pose.h"
+#include "image_utils.h"
+#include "image_drawing.h"
+
 #define DEFAULT_RTSP_PORT "7551"
 
 static char *port = (char *) DEFAULT_RTSP_PORT;
@@ -29,6 +33,13 @@ struct Client {
 std::list<Client> g_clients;
 std::mutex g_clients_mtx;
 bool g_running = true;
+
+rknn_app_context_t g_rknn_ctx;
+object_detect_result_list g_od_results;
+
+// COCO skeleton connections for drawing
+int g_skeleton[38] = {16,14, 14,12, 17,15, 15,13, 12,13, 6,12, 7,13, 6,7,
+                       6,8, 7,9, 8,10, 9,11, 2,3, 1,2, 1,3, 2,4, 3,5, 4,6, 5,7};
 
 static gboolean bus_call(GstBus *bus, GstMessage *msg, gpointer data);
 static void media_configure_cb(GstRTSPMediaFactory *factory, GstRTSPMedia *media, gpointer user_data);
@@ -72,11 +83,70 @@ static void pull_and_push_frames(GstElement *sink)
         if (!sample) break;
 
         GstBuffer *buf = gst_sample_get_buffer(sample);
+        GstCaps *caps = gst_sample_get_caps(sample);
+        if (!caps) { gst_sample_unref(sample); continue; }
 
+        GstStructure *s = gst_caps_get_structure(caps, 0);
+        int w, h;
+        gst_structure_get_int(s, "width", &w);
+        gst_structure_get_int(s, "height", &h);
+        gst_caps_unref(caps);
+
+        GstMapInfo info;
+        gst_buffer_map(buf, &info, (GstMapFlags)(GST_MAP_READ | GST_MAP_WRITE));
+
+        // ── RKNN 推理 ──
+        image_buffer_t src_img;
+        memset(&src_img, 0, sizeof(image_buffer_t));
+        src_img.width = w;
+        src_img.height = h;
+        src_img.width_stride = w * 3;
+        src_img.height_stride = h;
+        src_img.format = IMAGE_FORMAT_RGB888;   // 数据实际是 BGR，推理不受影响
+        src_img.virt_addr = info.data;
+        src_img.size = info.size;
+
+        int ret = inference_yolov8_pose_model(&g_rknn_ctx, &src_img, &g_od_results);
+        if (ret == 0) {
+            // ── 画检测结果（直接在原图 BGR 数据上画） ──
+            char text[256];
+            for (int i = 0; i < g_od_results.count; i++) {
+                object_detect_result *det = &g_od_results.results[i];
+                int x1 = det->box.left, y1 = det->box.top;
+                int x2 = det->box.right, y2 = det->box.bottom;
+
+                draw_rectangle(&src_img, x1, y1, x2 - x1, y2 - y1, COLOR_BLUE, 3);
+                sprintf(text, "person %.1f%%", det->prop * 100);
+                draw_text(&src_img, text, x1, y1 - 20, COLOR_RED, 10);
+
+                // 骨架
+                for (int j = 0; j < 19; j++) {
+                    int idx1 = g_skeleton[2*j] - 1;
+                    int idx2 = g_skeleton[2*j+1] - 1;
+                    draw_line(&src_img,
+                        (int)det->keypoints[idx1][0], (int)det->keypoints[idx1][1],
+                        (int)det->keypoints[idx2][0], (int)det->keypoints[idx2][1],
+                        COLOR_ORANGE, 3);
+                }
+                // 关键点
+                for (int j = 0; j < 17; j++) {
+                    draw_circle(&src_img,
+                        (int)det->keypoints[j][0], (int)det->keypoints[j][1],
+                        3, COLOR_YELLOW, 2);
+                }
+            }
+        } else {
+            static int once = 0;
+            if (!once) { std::cerr << "inference fail: " << ret << std::endl; once = 1; }
+        }
+
+        gst_buffer_unmap(buf, &info);
+
+        // ── 推给所有 RTSP 客户端 ──
         std::lock_guard<std::mutex> lock(g_clients_mtx);
         for (auto it = g_clients.begin(); it != g_clients.end(); ) {
-            GstFlowReturn ret = gst_app_src_push_buffer(GST_APP_SRC(it->appsrc), gst_buffer_ref(buf));
-            if (ret != GST_FLOW_OK) {
+            GstFlowReturn r = gst_app_src_push_buffer(GST_APP_SRC(it->appsrc), gst_buffer_ref(buf));
+            if (r != GST_FLOW_OK) {
                 it = g_clients.erase(it);
                 continue;
             }
@@ -103,10 +173,21 @@ int main(int argc, char *argv[])
     }
     g_option_context_free(optctx);
 
+    // ── 加载 RKNN 模型 ──
+    const char *model_path = argc > 1 ? argv[1] : "model/yolov8n-pose.rknn";
+    memset(&g_rknn_ctx, 0, sizeof(rknn_app_context_t));
+    init_post_process();
+
+    int init_ret = init_yolov8_pose_model(model_path, &g_rknn_ctx);
+    if (init_ret != 0) {
+        std::cerr << "Failed to init RKNN model: " << model_path << std::endl;
+        return 1;
+    }
+    std::cout << "RKNN model loaded: " << model_path << std::endl;
+
     const std::string camera_path = "/dev/video10";
     const std::string IP = get_local_ip();
 
-    // ── 本地 pipeline：只开一次摄像头 ──
     const std::string local_pipe =
         "v4l2src device=" + camera_path + " ! "
         "videoconvert ! "
@@ -114,8 +195,6 @@ int main(int argc, char *argv[])
         "t. ! queue ! autovideosink "
         "t. ! queue ! videoconvert ! video/x-raw,format=BGR ! "
         "appsink name=sink max-buffers=1 drop=true";
-
-    std::cout << "Pipeline: " << local_pipe << std::endl;
 
     GError *err = nullptr;
     GstElement *pipeline = gst_parse_launch(local_pipe.c_str(), &err);
@@ -134,14 +213,13 @@ int main(int argc, char *argv[])
     gst_element_set_state(pipeline, GST_STATE_PLAYING);
     std::cout << "Camera open at " << camera_path << std::endl;
 
-    // ── RTSP 服务器：appsrc 从主 pipeline 取帧 ──
+    // ── RTSP 服务器 ──
     GstRTSPServer *server = gst_rtsp_server_new();
     g_object_set(server, "service", port, NULL);
 
     GstRTSPMountPoints *mounts = gst_rtsp_server_get_mount_points(server);
     GstRTSPMediaFactory *factory = gst_rtsp_media_factory_new();
 
-    // 注意：外部用圆括号包起来，pay0 是 rtsp server 要求的 payloader 命名
     std::string launch =
         "( appsrc name=source is-live=true format=time ! "
         "video/x-raw,format=BGR,width=640,height=480 ! "
@@ -158,7 +236,6 @@ int main(int argc, char *argv[])
     gst_rtsp_server_attach(server, NULL);
     std::cout << "RTSP stream ready at rtsp://" << IP << ":" << port << "/test" << std::endl;
 
-    // ── 启动拉帧 + 推 RTSP 线程 ──
     std::thread(pull_and_push_frames, sink).detach();
 
     g_main_loop_run(loop);
@@ -167,6 +244,9 @@ int main(int argc, char *argv[])
     gst_element_set_state(pipeline, GST_STATE_NULL);
     gst_object_unref(pipeline);
     g_main_loop_unref(loop);
+
+    release_yolov8_pose_model(&g_rknn_ctx);
+    deinit_post_process();
 }
 
 static gboolean bus_call(GstBus *bus, GstMessage *msg, gpointer data)

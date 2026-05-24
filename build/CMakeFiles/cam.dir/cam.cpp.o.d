@@ -598,4 +598,15 @@ CMakeFiles/cam.dir/cam.cpp.o: \
  /usr/include/c++/11/bits/stl_list.h \
  /usr/include/c++/11/bits/allocated_ptr.h \
  /usr/include/c++/11/ext/aligned_buffer.h \
- /usr/include/c++/11/bits/list.tcc
+ /usr/include/c++/11/bits/list.tcc \
+ /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/yolov8-pose.h \
+ /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include/rknn_api.h \
+ /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/common.h \
+ /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.h \
+ /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_uninitialized.h \
+ /usr/include/c++/11/bits/stl_vector.h \
+ /usr/include/c++/11/bits/stl_bvector.h \
+ /usr/include/c++/11/bits/vector.tcc \
+ /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/image_utils.h \
+ /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/common.h \
+ /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/image_drawing.h

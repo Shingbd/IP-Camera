@@ -85,6 +85,51 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles /Users/shingbd/workspace/集创赛/read_usb/build//CMakeFiles/progress.marks
@@ -129,6 +174,106 @@ cam/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cam.dir/build.make CMakeFiles/cam.dir/build
 .PHONY : cam/fast
 
+#=============================================================================
+# Target rules for targets named fileutils
+
+# Build rule for target.
+fileutils: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 fileutils
+.PHONY : fileutils
+
+# fast build rule for target.
+fileutils/fast:
+	$(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/fileutils.dir/build.make utils.out/CMakeFiles/fileutils.dir/build
+.PHONY : fileutils/fast
+
+#=============================================================================
+# Target rules for targets named imagedrawing
+
+# Build rule for target.
+imagedrawing: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 imagedrawing
+.PHONY : imagedrawing
+
+# fast build rule for target.
+imagedrawing/fast:
+	$(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imagedrawing.dir/build.make utils.out/CMakeFiles/imagedrawing.dir/build
+.PHONY : imagedrawing/fast
+
+#=============================================================================
+# Target rules for targets named imageutils
+
+# Build rule for target.
+imageutils: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 imageutils
+.PHONY : imageutils
+
+# fast build rule for target.
+imageutils/fast:
+	$(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imageutils.dir/build.make utils.out/CMakeFiles/imageutils.dir/build
+.PHONY : imageutils/fast
+
+#=============================================================================
+# Target rules for targets named audioutils
+
+# Build rule for target.
+audioutils: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 audioutils
+.PHONY : audioutils
+
+# fast build rule for target.
+audioutils/fast:
+	$(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/audioutils.dir/build.make utils.out/CMakeFiles/audioutils.dir/build
+.PHONY : audioutils/fast
+
+3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.o: 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o
+.PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.o
+
+# target to build an object file
+3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cam.dir/build.make CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o
+.PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o
+
+3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.i: 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.i
+.PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.i
+
+# target to preprocess a source file
+3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cam.dir/build.make CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.i
+.PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.i
+
+3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.s: 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.s
+.PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.s
+
+# target to generate assembly for a file
+3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cam.dir/build.make CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.s
+.PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.s
+
+3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.o: 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o
+.PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.o
+
+# target to build an object file
+3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cam.dir/build.make CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o
+.PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o
+
+3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.i: 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.i
+.PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.i
+
+# target to preprocess a source file
+3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cam.dir/build.make CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.i
+.PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.i
+
+3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.s: 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.s
+.PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.s
+
+# target to generate assembly for a file
+3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cam.dir/build.make CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.s
+.PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.s
+
 cam.o: cam.cpp.o
 .PHONY : cam.o
 
@@ -160,8 +305,22 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... audioutils"
 	@echo "... cam"
+	@echo "... fileutils"
+	@echo "... imagedrawing"
+	@echo "... imageutils"
+	@echo "... 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.o"
+	@echo "... 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.i"
+	@echo "... 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.s"
+	@echo "... 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.o"
+	@echo "... 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.i"
+	@echo "... 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.s"
 	@echo "... cam.o"
 	@echo "... cam.i"
 	@echo "... cam.s"
