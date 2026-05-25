@@ -922,6 +922,45 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
   /usr/local/include/gstreamer-1.0/gst/rtsp-server/rtsp-sdp.h \
   /usr/local/include/gstreamer-1.0/gst/rtsp-server/rtsp-media-factory-uri.h \
   /usr/local/include/gstreamer-1.0/gst/rtsp-server/rtsp-params.h \
+  /usr/include/gstreamer-1.0/gst/video/video.h \
+  /usr/include/gstreamer-1.0/gst/video/video-prelude.h \
+  /usr/include/gstreamer-1.0/gst/video/video-format.h \
+  /usr/include/gstreamer-1.0/gst/video/video-enumtypes.h \
+  /usr/include/gstreamer-1.0/gst/video/video-tile.h \
+  /usr/include/gstreamer-1.0/gst/video/video-chroma.h \
+  /usr/include/gstreamer-1.0/gst/video/video-color.h \
+  /usr/include/gstreamer-1.0/gst/video/video-dither.h \
+  /usr/include/gstreamer-1.0/gst/video/video-info.h \
+  /usr/include/gstreamer-1.0/gst/video/video-frame.h \
+  /usr/include/gstreamer-1.0/gst/video/video-converter.h \
+  /usr/include/gstreamer-1.0/gst/video/video-scaler.h \
+  /usr/include/gstreamer-1.0/gst/video/video-resampler.h \
+  /usr/include/gstreamer-1.0/gst/video/video-multiview.h \
+  /usr/include/gstreamer-1.0/gst/video/colorbalancechannel.h \
+  /usr/include/gstreamer-1.0/gst/video/colorbalance.h \
+  /usr/include/gstreamer-1.0/gst/video/gstvideoaffinetransformationmeta.h \
+  /usr/include/gstreamer-1.0/gst/video/gstvideoaggregator.h \
+  /usr/include/gstreamer-1.0/gst/base/gstaggregator.h \
+  /usr/include/gstreamer-1.0/gst/video/gstvideocodecalphameta.h \
+  /usr/include/gstreamer-1.0/gst/video/gstvideodecoder.h \
+  /usr/include/gstreamer-1.0/gst/base/gstadapter.h \
+  /usr/include/gstreamer-1.0/gst/video/gstvideoutils.h \
+  /usr/include/gstreamer-1.0/gst/video/video-hdr.h \
+  /usr/include/gstreamer-1.0/gst/video/gstvideoencoder.h \
+  /usr/include/gstreamer-1.0/gst/video/gstvideofilter.h \
+  /usr/include/gstreamer-1.0/gst/base/gstbasetransform.h \
+  /usr/include/gstreamer-1.0/gst/video/gstvideometa.h \
+  /usr/include/gstreamer-1.0/gst/video/gstvideotimecode.h \
+  /usr/include/gstreamer-1.0/gst/video/gstvideopool.h \
+  /usr/include/gstreamer-1.0/gst/video/gstvideosink.h \
+  /usr/include/gstreamer-1.0/gst/video/navigation.h \
+  /usr/include/gstreamer-1.0/gst/video/video-anc.h \
+  /usr/include/gstreamer-1.0/gst/video/video-blend.h \
+  /usr/include/gstreamer-1.0/gst/video/videodirection.h \
+  /usr/include/gstreamer-1.0/gst/video/video-event.h \
+  /usr/include/gstreamer-1.0/gst/video/videoorientation.h \
+  /usr/include/gstreamer-1.0/gst/video/video-overlay-composition.h \
+  /usr/include/gstreamer-1.0/gst/video/videooverlay.h \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/ostream \
   /usr/include/c++/11/ios \
@@ -1095,8 +1134,6 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 
 /usr/include/c++/11/ctime:
 
-/usr/include/c++/11/chrono:
-
 /usr/include/c++/11/bits/this_thread_sleep.h:
 
 /usr/include/c++/11/bits/unique_ptr.h:
@@ -1125,9 +1162,53 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 
 /usr/include/aarch64-linux-gnu/bits/types/struct_iovec.h:
 
+/usr/include/ifaddrs.h:
+
 /usr/include/aarch64-linux-gnu/sys/socket.h:
 
-/usr/include/ifaddrs.h:
+/usr/include/gstreamer-1.0/gst/video/videooverlay.h:
+
+/usr/include/gstreamer-1.0/gst/video/videoorientation.h:
+
+/usr/include/gstreamer-1.0/gst/video/videodirection.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-blend.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-anc.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideosink.h:
+
+/usr/include/c++/11/chrono:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideopool.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideofilter.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-hdr.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideodecoder.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideoaggregator.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideoaffinetransformationmeta.h:
+
+/usr/include/gstreamer-1.0/gst/video/colorbalancechannel.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-resampler.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-scaler.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-converter.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-frame.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-info.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-tile.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-format.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-prelude.h:
 
 /usr/local/include/gstreamer-1.0/gst/rtsp-server/rtsp-params.h:
 
@@ -1188,6 +1269,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/glib-2.0/gio/gtcpconnection.h:
 
 /usr/include/glib-2.0/gio/gtask.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-event.h:
 
 /usr/include/glib-2.0/gio/gsubprocesslauncher.h:
 
@@ -1274,6 +1357,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/glib-2.0/gio/ginetaddress.h:
 
 /usr/include/glib-2.0/gio/gfileoutputstream.h:
+
+/usr/include/gstreamer-1.0/gst/base/gstbasetransform.h:
 
 /usr/include/glib-2.0/gio/gioerror.h:
 
@@ -1375,6 +1460,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 
 /usr/include/gstreamer-1.0/gst/gstcontrolbinding.h:
 
+/usr/include/gstreamer-1.0/gst/video/video.h:
+
 /usr/include/c++/11/bits/istream.tcc:
 
 /usr/include/c++/11/istream:
@@ -1411,9 +1498,13 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 
 /usr/include/c++/11/bits/basic_string.tcc:
 
+/usr/include/gstreamer-1.0/gst/base/gstadapter.h:
+
 /usr/include/gstreamer-1.0/gst/gstelementfactory.h:
 
 /usr/include/aarch64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/gstreamer-1.0/gst/video/navigation.h:
 
 /usr/include/c++/11/bits/stl_set.h:
 
@@ -1458,6 +1549,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/c++/11/cctype:
 
 /usr/include/aarch64-linux-gnu/bits/locale.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-multiview.h:
 
 /usr/include/locale.h:
 
@@ -1514,6 +1607,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/aarch64-linux-gnu/bits/stdio_lim.h:
 
 /usr/include/c++/11/bits/stl_multiset.h:
+
+/usr/include/gstreamer-1.0/gst/base/gstaggregator.h:
 
 /usr/include/glib-2.0/gio/gsettingsschema.h:
 
@@ -1679,6 +1774,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 
 /usr/include/aarch64-linux-gnu/bits/stdint-intn.h:
 
+/usr/include/gstreamer-1.0/gst/video/gstvideotimecode.h:
+
 /usr/include/glib-2.0/glib/grefcount.h:
 
 /usr/include/aarch64-linux-gnu/bits/struct_rwlock.h:
@@ -1686,6 +1783,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/glib-2.0/glib/ghook.h:
 
 /usr/local/include/gstreamer-1.0/gst/rtsp-server/rtsp-server.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideoencoder.h:
 
 /usr/include/c++/11/clocale:
 
@@ -1732,6 +1831,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/c++/11/stdexcept:
 
 /usr/include/gstreamer-1.0/gst/rtsp/rtsp.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-dither.h:
 
 /usr/include/aarch64-linux-gnu/bits/waitflags.h:
 
@@ -1831,6 +1932,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 
 /usr/include/c++/11/backward/binders.h:
 
+/usr/include/gstreamer-1.0/gst/video/gstvideocodecalphameta.h:
+
 /usr/include/aarch64-linux-gnu/bits/types/__locale_t.h:
 
 /usr/include/gstreamer-1.0/gst/gstdatetime.h:
@@ -1846,6 +1949,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/c++/11/bits/predefined_ops.h:
 
 /usr/include/aarch64-linux-gnu/bits/types.h:
+
+/usr/include/gstreamer-1.0/gst/video/gstvideoutils.h:
 
 /usr/include/aarch64-linux-gnu/bits/struct_mutex.h:
 
@@ -1870,6 +1975,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/c++/11/cstdlib:
 
 /usr/include/c++/11/bits/stl_iterator_base_types.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-overlay-composition.h:
 
 /usr/include/c++/11/tr1/riemann_zeta.tcc:
 
@@ -1966,6 +2073,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/c++/11/bits/stl_uninitialized.h:
 
 /usr/include/glib-2.0/glib/grefstring.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-enumtypes.h:
 
 /usr/include/glib-2.0/glib/guri.h:
 
@@ -2079,6 +2188,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 
 /usr/include/linux/posix_types.h:
 
+/usr/include/gstreamer-1.0/gst/video/gstvideometa.h:
+
 /usr/include/asm-generic/posix_types.h:
 
 /usr/include/aarch64-linux-gnu/bits/types/stack_t.h:
@@ -2130,6 +2241,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/glib-2.0/gio/gbytesicon.h:
 
 /usr/include/aarch64-linux-gnu/bits/getopt_core.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-chroma.h:
 
 /usr/include/aarch64-linux-gnu/bits/unistd_ext.h:
 
@@ -2226,6 +2339,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/glib-2.0/gio/gfilenamecompleter.h:
 
 /usr/include/glib-2.0/glib/gvariant.h:
+
+/usr/include/gstreamer-1.0/gst/video/colorbalance.h:
 
 /usr/include/glib-2.0/glib/grand.h:
 
@@ -2436,6 +2551,8 @@ CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp \
 /usr/include/gstreamer-1.0/gst/gstparamspecs.h:
 
 /usr/include/gstreamer-1.0/gst/gstpipeline.h:
+
+/usr/include/gstreamer-1.0/gst/video/video-color.h:
 
 /usr/include/gstreamer-1.0/gst/gstpreset.h:
 

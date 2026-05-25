@@ -2,6 +2,7 @@
 #include <gst/app/gstappsink.h>
 #include <gst/app/gstappsrc.h>
 #include <gst/rtsp-server/rtsp-server.h>
+#include <gst/video/video.h>
 #include <iostream>
 #include <ifaddrs.h>
 #include <arpa/inet.h>
@@ -56,7 +57,7 @@ static void media_configure_cb(GstRTSPMediaFactory *factory, GstRTSPMedia *media
     GstElement *appsrc = gst_bin_get_by_name(GST_BIN(pipeline), "source");
 
     GstCaps *caps = gst_caps_new_simple("video/x-raw",
-        "format", G_TYPE_STRING, "BGR",
+        "format", G_TYPE_STRING, "NV12",
         "width", G_TYPE_INT, FRAME_W,
         "height", G_TYPE_INT, FRAME_H,
         NULL);
@@ -108,7 +109,7 @@ int main(int argc, char *argv[])
     }
     std::cout << "RKNN model loaded: " << model_path << std::endl;
 
-    const std::string camera_path = "/dev/video10";
+    const std::string camera_path = "/dev/video0";
     const std::string IP = get_local_ip();
     const std::string W = std::to_string(FRAME_W);
     const std::string H = std::to_string(FRAME_H);
@@ -123,9 +124,9 @@ int main(int argc, char *argv[])
         "v4l2src device=" + camera_path + " ! "
         "videoconvert ! "
         "tee name=t "
-        "t. ! queue ! videoconvert ! video/x-raw,format=BGR ! "
+        "t. ! queue ! videoconvert ! video/x-raw,format=NV12 ! "
         "    appsink name=sink_ai max-buffers=1 drop=true "
-        "t. ! queue ! videoconvert ! video/x-raw,format=BGR ! "
+        "t. ! queue ! videoconvert ! video/x-raw,format=NV12 ! "
         "    appsink name=sink_rtsp max-buffers=1 drop=true";
 
     std::cout << "Camera pipeline:\n" << cam_pipe << std::endl;
@@ -140,14 +141,14 @@ int main(int argc, char *argv[])
     std::cout << "Camera pipeline created OK" << std::endl;
 
     GstElement *sink_ai = gst_bin_get_by_name(GST_BIN(cam_pipeline), "sink_ai");
-    GstElement *sink_rtsp = gst_bin_get_by_name(GST_BIN(cam_pipeline), "sink_rtsp");
+    GstElement *  sink_rtsp = gst_bin_get_by_name(GST_BIN(cam_pipeline), "sink_rtsp");
     if (!sink_ai) std::cerr << "WARN: sink_ai not found!" << std::endl;
     if (!sink_rtsp) std::cerr << "WARN: sink_rtsp not found!" << std::endl;
 
     // ── 管道 2: 本地显示 ──
     const std::string display_pipe =
         "appsrc name=local_src is-live=true format=time ! "
-        "video/x-raw,format=BGR,width=" + W + ",height=" + H + " ! "
+        "video/x-raw,format=NV12,width=" + W + ",height=" + H + " ! "
         "videoconvert ! "
         "autovideosink sync=false";
 
@@ -165,7 +166,7 @@ int main(int argc, char *argv[])
     if (!local_src) std::cerr << "WARN: local_src not found!" << std::endl;
 
     GstCaps *caps = gst_caps_new_simple("video/x-raw",
-        "format", G_TYPE_STRING, "BGR",
+        "format", G_TYPE_STRING, "NV12",
         "width", G_TYPE_INT, FRAME_W,
         "height", G_TYPE_INT, FRAME_H,
         NULL);
@@ -216,7 +217,7 @@ int main(int argc, char *argv[])
 
     std::string launch =
         "( appsrc name=source is-live=true format=time ! "
-        "video/x-raw,format=BGR,width=" + W + ",height=" + H + " ! "
+        "video/x-raw,format=NV12,width=" + W + ",height=" + H + " ! "
         "videoconvert ! video/x-raw,format=I420 ! "
         "x264enc tune=zerolatency bitrate=2000 ! "
         "rtph264pay name=pay0 pt=96 )";
@@ -330,9 +331,9 @@ int main(int argc, char *argv[])
             memset(&src_img, 0, sizeof(image_buffer_t));
             src_img.width = w;
             src_img.height = h;
-            src_img.width_stride = w * 3;
+            src_img.width_stride = w;
             src_img.height_stride = h;
-            src_img.format = IMAGE_FORMAT_RGB888;
+            src_img.format = IMAGE_FORMAT_YUV420SP_NV12;
             src_img.virt_addr = info.data;
             src_img.size = info.size;
 
