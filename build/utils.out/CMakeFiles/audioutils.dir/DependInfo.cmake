@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/audio_utils.c" "utils.out/CMakeFiles/audioutils.dir/audio_utils.c.o" "gcc" "utils.out/CMakeFiles/audioutils.dir/audio_utils.c.o.d"
+  "/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/audio_utils.c" "utils.out/CMakeFiles/audioutils.dir/audio_utils.c.o" "gcc" "utils.out/CMakeFiles/audioutils.dir/audio_utils.c.o.d"
   )
 
 # Targets to which this target links.

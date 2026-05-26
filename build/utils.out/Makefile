@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/shingbd/workspace/集创赛/read_usb
+CMAKE_SOURCE_DIR = /Users/shingbd/workspace/集创赛/Main_project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/shingbd/workspace/集创赛/read_usb/build
+CMAKE_BINARY_DIR = /Users/shingbd/workspace/集创赛/Main_project/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles /Users/shingbd/workspace/集创赛/read_usb/build/utils.out//CMakeFiles/progress.marks
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles 0
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/shingbd/workspace/集创赛/Main_project/build/CMakeFiles /Users/shingbd/workspace/集创赛/Main_project/build/utils.out//CMakeFiles/progress.marks
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/shingbd/workspace/集创赛/Main_project/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/clean
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,22 +148,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/preinstall
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/preinstall
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 utils.out/CMakeFiles/fileutils.dir/rule:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/CMakeFiles/fileutils.dir/rule
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/CMakeFiles/fileutils.dir/rule
 .PHONY : utils.out/CMakeFiles/fileutils.dir/rule
 
 # Convenience name for target.
@@ -172,12 +172,12 @@ fileutils: utils.out/CMakeFiles/fileutils.dir/rule
 
 # fast build rule for target.
 fileutils/fast:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/fileutils.dir/build.make utils.out/CMakeFiles/fileutils.dir/build
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/fileutils.dir/build.make utils.out/CMakeFiles/fileutils.dir/build
 .PHONY : fileutils/fast
 
 # Convenience name for target.
 utils.out/CMakeFiles/imagedrawing.dir/rule:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/CMakeFiles/imagedrawing.dir/rule
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/CMakeFiles/imagedrawing.dir/rule
 .PHONY : utils.out/CMakeFiles/imagedrawing.dir/rule
 
 # Convenience name for target.
@@ -186,12 +186,12 @@ imagedrawing: utils.out/CMakeFiles/imagedrawing.dir/rule
 
 # fast build rule for target.
 imagedrawing/fast:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imagedrawing.dir/build.make utils.out/CMakeFiles/imagedrawing.dir/build
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imagedrawing.dir/build.make utils.out/CMakeFiles/imagedrawing.dir/build
 .PHONY : imagedrawing/fast
 
 # Convenience name for target.
 utils.out/CMakeFiles/imageutils.dir/rule:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/CMakeFiles/imageutils.dir/rule
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/CMakeFiles/imageutils.dir/rule
 .PHONY : utils.out/CMakeFiles/imageutils.dir/rule
 
 # Convenience name for target.
@@ -200,12 +200,12 @@ imageutils: utils.out/CMakeFiles/imageutils.dir/rule
 
 # fast build rule for target.
 imageutils/fast:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imageutils.dir/build.make utils.out/CMakeFiles/imageutils.dir/build
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imageutils.dir/build.make utils.out/CMakeFiles/imageutils.dir/build
 .PHONY : imageutils/fast
 
 # Convenience name for target.
 utils.out/CMakeFiles/audioutils.dir/rule:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/CMakeFiles/audioutils.dir/rule
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 utils.out/CMakeFiles/audioutils.dir/rule
 .PHONY : utils.out/CMakeFiles/audioutils.dir/rule
 
 # Convenience name for target.
@@ -214,7 +214,7 @@ audioutils: utils.out/CMakeFiles/audioutils.dir/rule
 
 # fast build rule for target.
 audioutils/fast:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/audioutils.dir/build.make utils.out/CMakeFiles/audioutils.dir/build
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/audioutils.dir/build.make utils.out/CMakeFiles/audioutils.dir/build
 .PHONY : audioutils/fast
 
 audio_utils.o: audio_utils.c.o
@@ -222,7 +222,7 @@ audio_utils.o: audio_utils.c.o
 
 # target to build an object file
 audio_utils.c.o:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/audioutils.dir/build.make utils.out/CMakeFiles/audioutils.dir/audio_utils.c.o
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/audioutils.dir/build.make utils.out/CMakeFiles/audioutils.dir/audio_utils.c.o
 .PHONY : audio_utils.c.o
 
 audio_utils.i: audio_utils.c.i
@@ -230,7 +230,7 @@ audio_utils.i: audio_utils.c.i
 
 # target to preprocess a source file
 audio_utils.c.i:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/audioutils.dir/build.make utils.out/CMakeFiles/audioutils.dir/audio_utils.c.i
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/audioutils.dir/build.make utils.out/CMakeFiles/audioutils.dir/audio_utils.c.i
 .PHONY : audio_utils.c.i
 
 audio_utils.s: audio_utils.c.s
@@ -238,7 +238,7 @@ audio_utils.s: audio_utils.c.s
 
 # target to generate assembly for a file
 audio_utils.c.s:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/audioutils.dir/build.make utils.out/CMakeFiles/audioutils.dir/audio_utils.c.s
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/audioutils.dir/build.make utils.out/CMakeFiles/audioutils.dir/audio_utils.c.s
 .PHONY : audio_utils.c.s
 
 file_utils.o: file_utils.c.o
@@ -246,7 +246,7 @@ file_utils.o: file_utils.c.o
 
 # target to build an object file
 file_utils.c.o:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/fileutils.dir/build.make utils.out/CMakeFiles/fileutils.dir/file_utils.c.o
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/fileutils.dir/build.make utils.out/CMakeFiles/fileutils.dir/file_utils.c.o
 .PHONY : file_utils.c.o
 
 file_utils.i: file_utils.c.i
@@ -254,7 +254,7 @@ file_utils.i: file_utils.c.i
 
 # target to preprocess a source file
 file_utils.c.i:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/fileutils.dir/build.make utils.out/CMakeFiles/fileutils.dir/file_utils.c.i
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/fileutils.dir/build.make utils.out/CMakeFiles/fileutils.dir/file_utils.c.i
 .PHONY : file_utils.c.i
 
 file_utils.s: file_utils.c.s
@@ -262,7 +262,7 @@ file_utils.s: file_utils.c.s
 
 # target to generate assembly for a file
 file_utils.c.s:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/fileutils.dir/build.make utils.out/CMakeFiles/fileutils.dir/file_utils.c.s
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/fileutils.dir/build.make utils.out/CMakeFiles/fileutils.dir/file_utils.c.s
 .PHONY : file_utils.c.s
 
 image_drawing.o: image_drawing.c.o
@@ -270,7 +270,7 @@ image_drawing.o: image_drawing.c.o
 
 # target to build an object file
 image_drawing.c.o:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imagedrawing.dir/build.make utils.out/CMakeFiles/imagedrawing.dir/image_drawing.c.o
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imagedrawing.dir/build.make utils.out/CMakeFiles/imagedrawing.dir/image_drawing.c.o
 .PHONY : image_drawing.c.o
 
 image_drawing.i: image_drawing.c.i
@@ -278,7 +278,7 @@ image_drawing.i: image_drawing.c.i
 
 # target to preprocess a source file
 image_drawing.c.i:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imagedrawing.dir/build.make utils.out/CMakeFiles/imagedrawing.dir/image_drawing.c.i
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imagedrawing.dir/build.make utils.out/CMakeFiles/imagedrawing.dir/image_drawing.c.i
 .PHONY : image_drawing.c.i
 
 image_drawing.s: image_drawing.c.s
@@ -286,7 +286,7 @@ image_drawing.s: image_drawing.c.s
 
 # target to generate assembly for a file
 image_drawing.c.s:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imagedrawing.dir/build.make utils.out/CMakeFiles/imagedrawing.dir/image_drawing.c.s
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imagedrawing.dir/build.make utils.out/CMakeFiles/imagedrawing.dir/image_drawing.c.s
 .PHONY : image_drawing.c.s
 
 image_utils.o: image_utils.c.o
@@ -294,7 +294,7 @@ image_utils.o: image_utils.c.o
 
 # target to build an object file
 image_utils.c.o:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imageutils.dir/build.make utils.out/CMakeFiles/imageutils.dir/image_utils.c.o
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imageutils.dir/build.make utils.out/CMakeFiles/imageutils.dir/image_utils.c.o
 .PHONY : image_utils.c.o
 
 image_utils.i: image_utils.c.i
@@ -302,7 +302,7 @@ image_utils.i: image_utils.c.i
 
 # target to preprocess a source file
 image_utils.c.i:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imageutils.dir/build.make utils.out/CMakeFiles/imageutils.dir/image_utils.c.i
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imageutils.dir/build.make utils.out/CMakeFiles/imageutils.dir/image_utils.c.i
 .PHONY : image_utils.c.i
 
 image_utils.s: image_utils.c.s
@@ -310,7 +310,7 @@ image_utils.s: image_utils.c.s
 
 # target to generate assembly for a file
 image_utils.c.s:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imageutils.dir/build.make utils.out/CMakeFiles/imageutils.dir/image_utils.c.s
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f utils.out/CMakeFiles/imageutils.dir/build.make utils.out/CMakeFiles/imageutils.dir/image_utils.c.s
 .PHONY : image_utils.c.s
 
 # Help Target
@@ -352,6 +352,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

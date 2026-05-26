@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/libsndfile/include
+C_INCLUDES = -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/libsndfile/include
 
 C_FLAGS = 
 

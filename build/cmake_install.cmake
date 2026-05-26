@@ -1,4 +1,4 @@
-# Install script for directory: /Users/shingbd/workspace/集创赛/read_usb
+# Install script for directory: /Users/shingbd/workspace/集创赛/Main_project
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,12 +44,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/shingbd/workspace/集创赛/read_usb/build/3rdparty.out/cmake_install.cmake")
+  include("/Users/shingbd/workspace/集创赛/Main_project/build/3rdparty.out/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/shingbd/workspace/集创赛/read_usb/build/utils.out/cmake_install.cmake")
+  include("/Users/shingbd/workspace/集创赛/Main_project/build/utils.out/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -60,5 +60,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/shingbd/workspace/集创赛/read_usb/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/shingbd/workspace/集创赛/Main_project/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

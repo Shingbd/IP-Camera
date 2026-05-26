@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include
+C_INCLUDES = -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include
 
 C_FLAGS = 
 

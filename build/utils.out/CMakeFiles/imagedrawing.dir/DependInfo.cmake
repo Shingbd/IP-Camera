@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/image_drawing.c" "utils.out/CMakeFiles/imagedrawing.dir/image_drawing.c.o" "gcc" "utils.out/CMakeFiles/imagedrawing.dir/image_drawing.c.o.d"
+  "/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/image_drawing.c" "utils.out/CMakeFiles/imagedrawing.dir/image_drawing.c.o" "gcc" "utils.out/CMakeFiles/imagedrawing.dir/image_drawing.c.o.d"
   )
 
 # Targets to which this target links.

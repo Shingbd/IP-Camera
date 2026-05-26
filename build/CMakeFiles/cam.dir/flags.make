@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/local/include/gstreamer-1.0 -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include
+CXX_INCLUDES = -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/local/include/gstreamer-1.0 -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include
 
 CXX_FLAGS = -pthread
 

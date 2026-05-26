@@ -1,4 +1,4 @@
-# Install script for directory: /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils
+# Install script for directory: /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

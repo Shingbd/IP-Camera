@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/shingbd/workspace/集创赛/read_usb
+CMAKE_SOURCE_DIR = /Users/shingbd/workspace/集创赛/Main_project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/shingbd/workspace/集创赛/read_usb/build
+CMAKE_BINARY_DIR = /Users/shingbd/workspace/集创赛/Main_project/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles /Users/shingbd/workspace/集创赛/read_usb/build/3rdparty.out//CMakeFiles/progress.marks
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 3rdparty.out/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles 0
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/shingbd/workspace/集创赛/Main_project/build/CMakeFiles /Users/shingbd/workspace/集创赛/Main_project/build/3rdparty.out//CMakeFiles/progress.marks
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 3rdparty.out/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/shingbd/workspace/集创赛/Main_project/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 3rdparty.out/clean
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 3rdparty.out/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,17 +148,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 3rdparty.out/preinstall
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 3rdparty.out/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 3rdparty.out/preinstall
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 3rdparty.out/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Help Target
@@ -184,6 +184,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

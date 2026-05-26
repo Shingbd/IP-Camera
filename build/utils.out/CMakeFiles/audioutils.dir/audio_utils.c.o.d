@@ -1,5 +1,5 @@
 utils.out/CMakeFiles/audioutils.dir/audio_utils.c.o: \
- /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/audio_utils.c \
+ /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/audio_utils.c \
  /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/aarch64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -48,7 +48,7 @@ utils.out/CMakeFiles/audioutils.dir/audio_utils.c.o: \
  /usr/include/aarch64-linux-gnu/bits/struct_mutex.h \
  /usr/include/aarch64-linux-gnu/bits/struct_rwlock.h \
  /usr/include/alloca.h /usr/include/aarch64-linux-gnu/bits/stdlib-float.h \
- /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/libsndfile/include/sndfile.h \
+ /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/libsndfile/include/sndfile.h \
  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/aarch64-linux-gnu/bits/wchar.h \
  /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h /usr/include/math.h \
@@ -59,4 +59,4 @@ utils.out/CMakeFiles/audioutils.dir/audio_utils.c.o: \
  /usr/include/aarch64-linux-gnu/bits/fp-fast.h \
  /usr/include/aarch64-linux-gnu/bits/mathcalls-helper-functions.h \
  /usr/include/aarch64-linux-gnu/bits/mathcalls.h \
- /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/audio_utils.h
+ /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/audio_utils.h

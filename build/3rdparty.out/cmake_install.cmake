@@ -1,4 +1,4 @@
-# Install script for directory: /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty
+# Install script for directory: /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -43,10 +43,10 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE PROGRAM FILES "/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/rknpu2/Linux/aarch64/librknnrt.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE PROGRAM FILES "/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/rknpu2/Linux/aarch64/librknnrt.so")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE PROGRAM FILES "/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/librga/Linux/aarch64/librga.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE PROGRAM FILES "/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/librga/Linux/aarch64/librga.so")
 endif()
 

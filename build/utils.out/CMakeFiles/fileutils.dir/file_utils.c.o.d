@@ -1,5 +1,5 @@
 utils.out/CMakeFiles/fileutils.dir/file_utils.c.o: \
- /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/file_utils.c \
+ /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/file_utils.c \
  /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/aarch64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \

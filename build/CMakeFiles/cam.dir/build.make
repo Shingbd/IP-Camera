@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/shingbd/workspace/集创赛/read_usb
+CMAKE_SOURCE_DIR = /Users/shingbd/workspace/集创赛/Main_project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/shingbd/workspace/集创赛/read_usb/build
+CMAKE_BINARY_DIR = /Users/shingbd/workspace/集创赛/Main_project/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/cam.dir/depend.make
@@ -72,58 +72,58 @@ include CMakeFiles/cam.dir/flags.make
 CMakeFiles/cam.dir/cam.cpp.o: CMakeFiles/cam.dir/flags.make
 CMakeFiles/cam.dir/cam.cpp.o: ../cam.cpp
 CMakeFiles/cam.dir/cam.cpp.o: CMakeFiles/cam.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/cam.dir/cam.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cam.dir/cam.cpp.o -MF CMakeFiles/cam.dir/cam.cpp.o.d -o CMakeFiles/cam.dir/cam.cpp.o -c /Users/shingbd/workspace/集创赛/read_usb/cam.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shingbd/workspace/集创赛/Main_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/cam.dir/cam.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cam.dir/cam.cpp.o -MF CMakeFiles/cam.dir/cam.cpp.o.d -o CMakeFiles/cam.dir/cam.cpp.o -c /Users/shingbd/workspace/集创赛/Main_project/cam.cpp
 
 CMakeFiles/cam.dir/cam.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cam.dir/cam.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shingbd/workspace/集创赛/read_usb/cam.cpp > CMakeFiles/cam.dir/cam.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shingbd/workspace/集创赛/Main_project/cam.cpp > CMakeFiles/cam.dir/cam.cpp.i
 
 CMakeFiles/cam.dir/cam.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cam.dir/cam.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shingbd/workspace/集创赛/read_usb/cam.cpp -o CMakeFiles/cam.dir/cam.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shingbd/workspace/集创赛/Main_project/cam.cpp -o CMakeFiles/cam.dir/cam.cpp.s
 
 CMakeFiles/cam.dir/behavior_detection.cpp.o: CMakeFiles/cam.dir/flags.make
 CMakeFiles/cam.dir/behavior_detection.cpp.o: ../behavior_detection.cpp
 CMakeFiles/cam.dir/behavior_detection.cpp.o: CMakeFiles/cam.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/cam.dir/behavior_detection.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cam.dir/behavior_detection.cpp.o -MF CMakeFiles/cam.dir/behavior_detection.cpp.o.d -o CMakeFiles/cam.dir/behavior_detection.cpp.o -c /Users/shingbd/workspace/集创赛/read_usb/behavior_detection.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shingbd/workspace/集创赛/Main_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/cam.dir/behavior_detection.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cam.dir/behavior_detection.cpp.o -MF CMakeFiles/cam.dir/behavior_detection.cpp.o.d -o CMakeFiles/cam.dir/behavior_detection.cpp.o -c /Users/shingbd/workspace/集创赛/Main_project/behavior_detection.cpp
 
 CMakeFiles/cam.dir/behavior_detection.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cam.dir/behavior_detection.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shingbd/workspace/集创赛/read_usb/behavior_detection.cpp > CMakeFiles/cam.dir/behavior_detection.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shingbd/workspace/集创赛/Main_project/behavior_detection.cpp > CMakeFiles/cam.dir/behavior_detection.cpp.i
 
 CMakeFiles/cam.dir/behavior_detection.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cam.dir/behavior_detection.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shingbd/workspace/集创赛/read_usb/behavior_detection.cpp -o CMakeFiles/cam.dir/behavior_detection.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shingbd/workspace/集创赛/Main_project/behavior_detection.cpp -o CMakeFiles/cam.dir/behavior_detection.cpp.s
 
 CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o: CMakeFiles/cam.dir/flags.make
 CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o: ../3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc
 CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o: CMakeFiles/cam.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o -MF CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o.d -o CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o -c /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shingbd/workspace/集创赛/Main_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o -MF CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o.d -o CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o -c /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc
 
 CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc > CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc > CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.i
 
 CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc -o CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc -o CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.s
 
 CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o: CMakeFiles/cam.dir/flags.make
 CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o: ../3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc
 CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o: CMakeFiles/cam.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o -MF CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o.d -o CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o -c /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/shingbd/workspace/集创赛/Main_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o -MF CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o.d -o CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o -c /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc
 
 CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc > CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc > CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.i
 
 CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc -o CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc -o CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.s
 
 # Object files for target cam
 cam_OBJECTS = \
@@ -148,7 +148,7 @@ cam: ../3rdpart/rknn_model_zoo/3rdparty/rknpu2/Linux/aarch64/librknnrt.so
 cam: ../3rdpart/rknn_model_zoo/3rdparty/librga/Linux/aarch64/librga.a
 cam: ../3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/Linux/aarch64/libturbojpeg.a
 cam: CMakeFiles/cam.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable cam"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/shingbd/workspace/集创赛/Main_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable cam"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cam.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -160,6 +160,6 @@ CMakeFiles/cam.dir/clean:
 .PHONY : CMakeFiles/cam.dir/clean
 
 CMakeFiles/cam.dir/depend:
-	cd /Users/shingbd/workspace/集创赛/read_usb/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/shingbd/workspace/集创赛/read_usb /Users/shingbd/workspace/集创赛/read_usb /Users/shingbd/workspace/集创赛/read_usb/build /Users/shingbd/workspace/集创赛/read_usb/build /Users/shingbd/workspace/集创赛/read_usb/build/CMakeFiles/cam.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/shingbd/workspace/集创赛/Main_project/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/shingbd/workspace/集创赛/Main_project /Users/shingbd/workspace/集创赛/Main_project /Users/shingbd/workspace/集创赛/Main_project/build /Users/shingbd/workspace/集创赛/Main_project/build /Users/shingbd/workspace/集创赛/Main_project/build/CMakeFiles/cam.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/cam.dir/depend
 

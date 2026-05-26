@@ -1,5 +1,5 @@
 CMakeFiles/cam.dir/cam.cpp.o: \
- /Users/shingbd/workspace/集创赛/read_usb/cam.cpp \
+ /Users/shingbd/workspace/集创赛/Main_project/cam.cpp \
  /usr/include/stdc-predef.h /usr/include/gstreamer-1.0/gst/gst.h \
  /usr/include/glib-2.0/glib.h /usr/include/glib-2.0/glib/galloca.h \
  /usr/include/glib-2.0/glib/gtypes.h \
@@ -640,15 +640,15 @@ CMakeFiles/cam.dir/cam.cpp.o: \
  /usr/include/c++/11/bits/list.tcc /usr/include/c++/11/atomic \
  /usr/include/c++/11/bits/atomic_base.h \
  /usr/include/c++/11/bits/atomic_lockfree_defines.h \
- /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/yolov8-pose.h \
- /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include/rknn_api.h \
- /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/common.h \
- /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.h \
+ /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/yolov8-pose.h \
+ /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include/rknn_api.h \
+ /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/common.h \
+ /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_uninitialized.h \
  /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
  /usr/include/c++/11/bits/vector.tcc \
- /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/image_utils.h \
- /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/common.h \
- /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/image_drawing.h \
- /Users/shingbd/workspace/集创赛/read_usb/behavior_detection.h
+ /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/image_utils.h \
+ /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/common.h \
+ /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/image_drawing.h \
+ /Users/shingbd/workspace/集创赛/Main_project/behavior_detection.h

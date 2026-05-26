@@ -13,6 +13,7 @@
 #include <mutex>
 #include <list>
 #include <chrono>
+#include <ctime>
 #include <atomic>
 
 #include "yolov8-pose.h"
@@ -224,7 +225,7 @@ int main(int argc, char *argv[])
         "( appsrc name=source is-live=true format=time ! "
         "video/x-raw,format=NV12,width=" + W + ",height=" + H + " ! "
         "videoconvert ! video/x-raw,format=I420 ! "
-        "x264enc tune=zerolatency bitrate=2000 ! "
+        "mpph264enc ! "
         "rtph264pay name=pay0 pt=96 )";
 
     gst_rtsp_media_factory_set_launch(factory, launch.c_str());
@@ -272,6 +273,15 @@ int main(int argc, char *argv[])
     std::thread([sink_ai, local_src]() {
         int frame_count = 0;
         auto last_time = std::chrono::steady_clock::now();
+
+        enum RecState : int { REC_IDLE, REC_WARMING, REC_ACTIVE };
+        RecState rec_state = REC_IDLE;
+        auto warmup_start = std::chrono::steady_clock::time_point{};
+        GstElement *rec_pipeline = nullptr;
+        GstElement *rec_src = nullptr;
+        int rec_frame_idx = 0;
+        int normal_count = 0;
+        auto rec_start_time = std::chrono::steady_clock::time_point{};
 
         while (g_running) {
             GstSample *sample = gst_app_sink_pull_sample(GST_APP_SINK(sink_ai));
@@ -383,11 +393,13 @@ int main(int argc, char *argv[])
                 }
 
                 // ── 行为分析 ──
-                auto br = analyze_behavior(g_od_results, 4);
+                BehaviorReport br;
+                memset(&br, 0, sizeof(br));
+                br = analyze_behavior(g_od_results, 4);
                 int line_y = 30;
-                char buf[128];
-                sprintf(buf, "people=%d", br.people_count);
-                draw_text(&src_img, buf, 10, line_y, COLOR_GREEN, 10);
+                char text_buf[128];
+                sprintf(text_buf, "people=%d", br.people_count);
+                draw_text(&src_img, text_buf, 10, line_y, COLOR_GREEN, 10);
                 line_y += 20;
                 if (br.crowd_alert) {
                     draw_text(&src_img, "CROWD ALERT", 10, line_y, COLOR_RED, 12);
@@ -401,9 +413,107 @@ int main(int argc, char *argv[])
                     draw_text(&src_img, "VIOLENCE", 10, line_y, COLOR_RED, 12);
                     line_y += 20;
                 }
-            }
+
+                // ── 录制状态机 ──
+                bool abnormal = br.violence_alert || br.crouching || br.crowd_alert;
+
+                if (abnormal) {
+                    normal_count = 0;
+                } else {
+                    normal_count++;
+                }
+
+                switch (rec_state) {
+                case REC_IDLE:
+                    if (abnormal) {
+                        rec_state = REC_WARMING;
+                        warmup_start = std::chrono::steady_clock::now();
+                    }
+                    break;
+                case REC_WARMING:
+                    // 连续 ~1s 正常帧 → 取消此次预录
+                    if (normal_count >= 30) {
+                        rec_state = REC_IDLE;
+                    } else if (abnormal) {
+                        auto elapsed = std::chrono::steady_clock::now() - warmup_start;
+                        if (elapsed >= std::chrono::seconds(3)) {
+                            auto now_t = std::chrono::system_clock::now();
+                            auto tt = std::chrono::system_clock::to_time_t(now_t);
+                            char path[128];
+                            strftime(path, sizeof(path), "record_%Y%m%d_%H%M%S.mp4", localtime(&tt));
+
+                            std::string rec_desc = "appsrc name=recsrc ! queue ! videoconvert ! mpph264enc "
+                                                   "! h264parse ! mp4mux ! filesink location=\"" +
+                                                   std::string(path) + "\"";
+
+                            rec_pipeline = gst_parse_launch(rec_desc.c_str(), nullptr);
+                            if (rec_pipeline) {
+                                rec_src = gst_bin_get_by_name(GST_BIN(rec_pipeline), "recsrc");
+                                if (rec_src) {
+                                    GstCaps *rc = gst_caps_new_simple("video/x-raw",
+                                        "format", G_TYPE_STRING, "NV12",
+                                        "width", G_TYPE_INT, FRAME_W,
+                                        "height", G_TYPE_INT, FRAME_H,
+                                        "framerate", GST_TYPE_FRACTION, 30, 1, NULL);
+                                    gst_app_src_set_caps(GST_APP_SRC(rec_src), rc);
+                                    gst_caps_unref(rc);
+                                    gst_app_src_set_stream_type(GST_APP_SRC(rec_src), GST_APP_STREAM_TYPE_STREAM);
+                                    gst_element_set_state(rec_pipeline, GST_STATE_PLAYING);
+                                    rec_frame_idx = 0;
+                                    std::cout << "[REC] started: " << path << std::endl;
+                                } else {
+                                    gst_object_unref(rec_pipeline);
+                                    rec_pipeline = nullptr;
+                                }
+                            }
+                            rec_start_time = std::chrono::steady_clock::now();
+                            rec_state = REC_ACTIVE;
+                        }
+                    }
+                    break;
+                case REC_ACTIVE:
+                    // 连续 ~2s 正常帧 且 至少录制了 5s，才停止
+                    if (normal_count >= 60) {
+                        auto rec_elapsed = std::chrono::steady_clock::now() - rec_start_time;
+                        if (rec_elapsed >= std::chrono::seconds(5)) {
+                            if (rec_src) {
+                                gst_app_src_end_of_stream(GST_APP_SRC(rec_src));
+                                GstBus *bus = gst_element_get_bus(rec_pipeline);
+                                gst_bus_timed_pop_filtered(bus, 3 * GST_SECOND,
+                                    static_cast<GstMessageType>(GST_MESSAGE_EOS | GST_MESSAGE_ERROR));
+                                gst_object_unref(bus);
+                                gst_element_set_state(rec_pipeline, GST_STATE_NULL);
+                                gst_object_unref(rec_src);
+                                gst_object_unref(rec_pipeline);
+                                rec_pipeline = nullptr;
+                                rec_src = nullptr;
+                                std::cout << "[REC] stopped" << std::endl;
+                            }
+                            rec_state = REC_IDLE;
+                        } else {
+                            std::cout << "[REC] safety hold: " << std::chrono::duration_cast<std::chrono::seconds>(rec_elapsed).count() << "s" << std::endl;
+                        }
+                    }
+                    break;
+                }
+
+                // ── 录制指示器 ──
+                if (rec_state == REC_ACTIVE) {
+                    draw_text(&src_img, "REC", FRAME_W - 60, 20, COLOR_RED, 15);
+                }
+            } // end if ret==0
 
             gst_buffer_unmap(buf, &info);
+
+            // ── 投递到录制管道 ──
+            if (rec_state == REC_ACTIVE && rec_src) {
+                GstBuffer *rec_copy = gst_buffer_copy(buf);
+                GST_BUFFER_PTS(rec_copy) = gst_util_uint64_scale(rec_frame_idx++, GST_SECOND, 30);
+                GST_BUFFER_DURATION(rec_copy) = gst_util_uint64_scale(1, GST_SECOND, 30);
+                gst_app_src_push_buffer(GST_APP_SRC(rec_src), rec_copy);
+            }
+
+            // ── 投递到本地显示 ──
             gst_app_src_push_buffer(GST_APP_SRC(local_src), buf);
 
             frame_count++;

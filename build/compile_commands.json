@@ -1,42 +1,42 @@
 [
 {
-  "directory": "/Users/shingbd/workspace/集创赛/read_usb/build",
-  "command": "/usr/bin/c++  -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/local/include/gstreamer-1.0 -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include -pthread -o CMakeFiles/cam.dir/cam.cpp.o -c /Users/shingbd/workspace/集创赛/read_usb/cam.cpp",
-  "file": "/Users/shingbd/workspace/集创赛/read_usb/cam.cpp"
+  "directory": "/Users/shingbd/workspace/集创赛/Main_project/build",
+  "command": "/usr/bin/c++  -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/local/include/gstreamer-1.0 -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include -pthread -o CMakeFiles/cam.dir/cam.cpp.o -c /Users/shingbd/workspace/集创赛/Main_project/cam.cpp",
+  "file": "/Users/shingbd/workspace/集创赛/Main_project/cam.cpp"
 },
 {
-  "directory": "/Users/shingbd/workspace/集创赛/read_usb/build",
-  "command": "/usr/bin/c++  -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/local/include/gstreamer-1.0 -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include -pthread -o CMakeFiles/cam.dir/behavior_detection.cpp.o -c /Users/shingbd/workspace/集创赛/read_usb/behavior_detection.cpp",
-  "file": "/Users/shingbd/workspace/集创赛/read_usb/behavior_detection.cpp"
+  "directory": "/Users/shingbd/workspace/集创赛/Main_project/build",
+  "command": "/usr/bin/c++  -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/local/include/gstreamer-1.0 -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include -pthread -o CMakeFiles/cam.dir/behavior_detection.cpp.o -c /Users/shingbd/workspace/集创赛/Main_project/behavior_detection.cpp",
+  "file": "/Users/shingbd/workspace/集创赛/Main_project/behavior_detection.cpp"
 },
 {
-  "directory": "/Users/shingbd/workspace/集创赛/read_usb/build",
-  "command": "/usr/bin/c++  -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/local/include/gstreamer-1.0 -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include -pthread -o CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o -c /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc",
-  "file": "/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc"
+  "directory": "/Users/shingbd/workspace/集创赛/Main_project/build",
+  "command": "/usr/bin/c++  -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/local/include/gstreamer-1.0 -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include -pthread -o CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o -c /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc",
+  "file": "/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc"
 },
 {
-  "directory": "/Users/shingbd/workspace/集创赛/read_usb/build",
-  "command": "/usr/bin/c++  -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/local/include/gstreamer-1.0 -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include -pthread -o CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o -c /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc",
-  "file": "/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc"
+  "directory": "/Users/shingbd/workspace/集创赛/Main_project/build",
+  "command": "/usr/bin/c++  -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/local/include/gstreamer-1.0 -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/rknpu2/include -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include -pthread -o CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o -c /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc",
+  "file": "/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc"
 },
 {
-  "directory": "/Users/shingbd/workspace/集创赛/read_usb/build/utils.out",
-  "command": "/usr/bin/cc  -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils  -o CMakeFiles/fileutils.dir/file_utils.c.o -c /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/file_utils.c",
-  "file": "/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/file_utils.c"
+  "directory": "/Users/shingbd/workspace/集创赛/Main_project/build/utils.out",
+  "command": "/usr/bin/cc  -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils  -o CMakeFiles/fileutils.dir/file_utils.c.o -c /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/file_utils.c",
+  "file": "/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/file_utils.c"
 },
 {
-  "directory": "/Users/shingbd/workspace/集创赛/read_usb/build/utils.out",
-  "command": "/usr/bin/cc  -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils  -o CMakeFiles/imagedrawing.dir/image_drawing.c.o -c /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/image_drawing.c",
-  "file": "/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/image_drawing.c"
+  "directory": "/Users/shingbd/workspace/集创赛/Main_project/build/utils.out",
+  "command": "/usr/bin/cc  -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils  -o CMakeFiles/imagedrawing.dir/image_drawing.c.o -c /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/image_drawing.c",
+  "file": "/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/image_drawing.c"
 },
 {
-  "directory": "/Users/shingbd/workspace/集创赛/read_usb/build/utils.out",
-  "command": "/usr/bin/cc  -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include  -o CMakeFiles/imageutils.dir/image_utils.c.o -c /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/image_utils.c",
-  "file": "/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/image_utils.c"
+  "directory": "/Users/shingbd/workspace/集创赛/Main_project/build/utils.out",
+  "command": "/usr/bin/cc  -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/stb_image -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/librga/include -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/jpeg_turbo/include  -o CMakeFiles/imageutils.dir/image_utils.c.o -c /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/image_utils.c",
+  "file": "/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/image_utils.c"
 },
 {
-  "directory": "/Users/shingbd/workspace/集创赛/read_usb/build/utils.out",
-  "command": "/usr/bin/cc  -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/3rdparty/libsndfile/include  -o CMakeFiles/audioutils.dir/audio_utils.c.o -c /Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/audio_utils.c",
-  "file": "/Users/shingbd/workspace/集创赛/read_usb/3rdpart/rknn_model_zoo/utils/audio_utils.c"
+  "directory": "/Users/shingbd/workspace/集创赛/Main_project/build/utils.out",
+  "command": "/usr/bin/cc  -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils -I/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/3rdparty/libsndfile/include  -o CMakeFiles/audioutils.dir/audio_utils.c.o -c /Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/audio_utils.c",
+  "file": "/Users/shingbd/workspace/集创赛/Main_project/3rdpart/rknn_model_zoo/utils/audio_utils.c"
 }
 ]
