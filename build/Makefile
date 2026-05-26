@@ -274,6 +274,30 @@ audioutils/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cam.dir/build.make CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.s
 .PHONY : 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.s
 
+behavior_detection.o: behavior_detection.cpp.o
+.PHONY : behavior_detection.o
+
+# target to build an object file
+behavior_detection.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cam.dir/build.make CMakeFiles/cam.dir/behavior_detection.cpp.o
+.PHONY : behavior_detection.cpp.o
+
+behavior_detection.i: behavior_detection.cpp.i
+.PHONY : behavior_detection.i
+
+# target to preprocess a source file
+behavior_detection.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cam.dir/build.make CMakeFiles/cam.dir/behavior_detection.cpp.i
+.PHONY : behavior_detection.cpp.i
+
+behavior_detection.s: behavior_detection.cpp.s
+.PHONY : behavior_detection.s
+
+# target to generate assembly for a file
+behavior_detection.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cam.dir/build.make CMakeFiles/cam.dir/behavior_detection.cpp.s
+.PHONY : behavior_detection.cpp.s
+
 cam.o: cam.cpp.o
 .PHONY : cam.o
 
@@ -321,6 +345,9 @@ help:
 	@echo "... 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.o"
 	@echo "... 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.i"
 	@echo "... 3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.s"
+	@echo "... behavior_detection.o"
+	@echo "... behavior_detection.i"
+	@echo "... behavior_detection.s"
 	@echo "... cam.o"
 	@echo "... cam.i"
 	@echo "... cam.s"

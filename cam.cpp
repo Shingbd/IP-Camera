@@ -18,10 +18,12 @@
 #include "yolov8-pose.h"
 #include "image_utils.h"
 #include "image_drawing.h"
+#include "behavior_detection.h"
 
 #define DEFAULT_RTSP_PORT "7551"
 
 static char *port = (char *) DEFAULT_RTSP_PORT;
+static int device_num = 10;
 
 constexpr int FRAME_W = 640;
 constexpr int FRAME_H = 480;
@@ -29,6 +31,8 @@ constexpr int FRAME_H = 480;
 static GOptionEntry entries[] = {
     {"port", 'p', 0, G_OPTION_ARG_STRING, &port,
         "Port to listen on (default: " DEFAULT_RTSP_PORT ")", "PORT"},
+    {"device", 'd', 0, G_OPTION_ARG_INT, &device_num,
+        "Camera device number (default: 10 → /dev/video10)", "NUM"},
     {NULL}
 };
 
@@ -98,7 +102,7 @@ int main(int argc, char *argv[])
     }
     g_option_context_free(optctx);
 
-    const char *model_path = argc > 1 ? argv[1] : "model/yolov8n-pose.rknn";
+    const char *model_path = argc > 1 ? argv[1] : "model/yolov8_pose.rknn";
     memset(&g_rknn_ctx, 0, sizeof(rknn_app_context_t));
     init_post_process();
 
@@ -109,7 +113,7 @@ int main(int argc, char *argv[])
     }
     std::cout << "RKNN model loaded: " << model_path << std::endl;
 
-    const std::string camera_path = "/dev/video0";
+    const std::string camera_path = "/dev/video" + std::to_string(device_num);
     const std::string IP = get_local_ip();
     const std::string W = std::to_string(FRAME_W);
     const std::string H = std::to_string(FRAME_H);
@@ -119,10 +123,11 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // ── 管道 1: 摄像头采集（tee 分流，零拷贝）──
+    // ── 管道 1: 摄像头采集 → 缩放到 640x480（tee 分流，零拷贝）──
     const std::string cam_pipe =
         "v4l2src device=" + camera_path + " ! "
-        "videoconvert ! "
+        "videoconvert ! videoscale ! "
+        "video/x-raw,format=NV12,width=" + W + ",height=" + H + " ! "
         "tee name=t "
         "t. ! queue ! videoconvert ! video/x-raw,format=NV12 ! "
         "    appsink name=sink_ai max-buffers=1 drop=true "
@@ -190,7 +195,7 @@ int main(int argc, char *argv[])
         std::cerr << "ERROR: camera pipeline failed to PLAY" << std::endl;
         return 1;
     }
-    std::cout << "Camera pipeline set to PLAYING (" << r1 << ")" << std::endl;
+    std::cout << "Camera pipeline set to PLAYING (" << r1 << ") - device: " << camera_path << std::endl;
 
     GstStateChangeReturn r2 = gst_element_set_state(display_pipeline, GST_STATE_PLAYING);
     if (r2 == GST_STATE_CHANGE_FAILURE) {
@@ -375,6 +380,26 @@ int main(int argc, char *argv[])
                             (int)det->keypoints[j][0], (int)det->keypoints[j][1],
                             3, COLOR_YELLOW, 2);
                     }
+                }
+
+                // ── 行为分析 ──
+                auto br = analyze_behavior(g_od_results, 4);
+                int line_y = 30;
+                char buf[128];
+                sprintf(buf, "people=%d", br.people_count);
+                draw_text(&src_img, buf, 10, line_y, COLOR_GREEN, 10);
+                line_y += 20;
+                if (br.crowd_alert) {
+                    draw_text(&src_img, "CROWD ALERT", 10, line_y, COLOR_RED, 12);
+                    line_y += 20;
+                }
+                if (br.crouching) {
+                    draw_text(&src_img, "CROUCH", 10, line_y, COLOR_YELLOW, 10);
+                    line_y += 20;
+                }
+                if (br.violence_alert) {
+                    draw_text(&src_img, "VIOLENCE", 10, line_y, COLOR_RED, 12);
+                    line_y += 20;
                 }
             }
 

@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/postprocess.cc.o.d"
   "CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o"
   "CMakeFiles/cam.dir/3rdpart/rknn_model_zoo/examples/yolov8_pose/cpp/rknpu2/yolov8-pose.cc.o.d"
+  "CMakeFiles/cam.dir/behavior_detection.cpp.o"
+  "CMakeFiles/cam.dir/behavior_detection.cpp.o.d"
   "CMakeFiles/cam.dir/cam.cpp.o"
   "CMakeFiles/cam.dir/cam.cpp.o.d"
   "cam"

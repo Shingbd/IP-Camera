@@ -24,6 +24,7 @@ set(YOLOV8_POSE ${RKNN_ZOO}/examples/yolov8_pose/cpp)
 # ── Sources ──
 add_executable(cam
     cam.cpp
+    behavior_detection.cpp
     ${YOLOV8_POSE}/postprocess.cc
     ${YOLOV8_POSE}/rknpu2/yolov8-pose.cc
 )
