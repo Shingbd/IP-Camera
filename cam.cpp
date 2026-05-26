@@ -33,7 +33,7 @@ static GOptionEntry entries[] = {
     {"port", 'p', 0, G_OPTION_ARG_STRING, &port,
         "Port to listen on (default: " DEFAULT_RTSP_PORT ")", "PORT"},
     {"device", 'd', 0, G_OPTION_ARG_INT, &device_num,
-        "Camera device number (default: 10 → /dev/video10)", "NUM"},
+        "Camera device number (default: 10 → /dev/video42)", "NUM"},
     {NULL}
 };
 
@@ -205,7 +205,7 @@ int main(int argc, char *argv[])
     }
     std::cout << "Display pipeline set to PLAYING (" << r2 << ")" << std::endl;
 
-    // ── 看门狗 ──
+    // ── 看门狗 ── 按引用捕获变量
     std::thread([&]() {
         while (g_running) {
             std::this_thread::sleep_for(std::chrono::seconds(3));
