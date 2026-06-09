@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/3rdpart/gst-rtsp-server" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/3rdpart/gst-rtsp-server/common" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/3rdpart/rknn_model_zoo" vcs="Git" />
+  </component>
+</project>

@@ -21,10 +21,15 @@ add_subdirectory(${RKNN_ZOO}/utils utils.out)
 
 set(YOLOV8_POSE ${RKNN_ZOO}/examples/yolov8_pose/cpp)
 
+# ── OpenSSL ──
+find_package(OpenSSL REQUIRED)
+
 # ── Sources ──
 add_executable(cam
     cam.cpp
     behavior_detection.cpp
+    crypto_utils.cpp
+    alert_server.cpp
     ${YOLOV8_POSE}/postprocess.cc
     ${YOLOV8_POSE}/rknpu2/yolov8-pose.cc
 )
@@ -48,6 +53,11 @@ target_link_libraries(cam PRIVATE
     ${LIBRKNNRT}
     dl
     Threads::Threads
+    OpenSSL::Crypto
+)
+
+target_include_directories(cam PRIVATE
+    ${OPENSSL_INCLUDE_DIR}
 )
 
 target_compile_options(cam PRIVATE

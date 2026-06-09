@@ -20,11 +20,13 @@
 #include "image_utils.h"
 #include "image_drawing.h"
 #include "behavior_detection.h"
+#include "alert_server.h"
 
 #define DEFAULT_RTSP_PORT "7551"
 
 static char *port = (char *) DEFAULT_RTSP_PORT;
 static int device_num = 10;
+static int alert_port = 7552;
 
 constexpr int FRAME_W = 640;
 constexpr int FRAME_H = 480;
@@ -34,6 +36,8 @@ static GOptionEntry entries[] = {
         "Port to listen on (default: " DEFAULT_RTSP_PORT ")", "PORT"},
     {"device", 'd', 0, G_OPTION_ARG_INT, &device_num,
         "Camera device number (default: 10 → /dev/video42)", "NUM"},
+    {"alert-port", 'a', 0, G_OPTION_ARG_INT, &alert_port,
+        "Alert server TCP port (default: 7552)", "PORT"},
     {NULL}
 };
 
@@ -55,6 +59,50 @@ std::atomic<bool> g_got_frame{false};
 
 int g_skeleton[38] = {16,14, 14,12, 17,15, 15,13, 12,13, 6,12, 7,13, 6,7,
                        6,8, 7,9, 8,10, 9,11, 2,3, 1,2, 1,3, 2,4, 3,5, 4,6, 5,7};
+
+struct Recorder {
+    GstElement *pipeline = nullptr;
+    GstElement *src = nullptr;
+    int frame_idx = 0;
+    bool is_auto = false;
+    std::string filename;
+
+    bool init(const std::string &path) {
+        std::string desc = "appsrc name=recsrc ! queue ! videoconvert ! mpph264enc "
+                           "! h264parse ! mp4mux ! filesink location=\"" + path + "\"";
+        pipeline = gst_parse_launch(desc.c_str(), nullptr);
+        if (!pipeline) return false;
+        src = gst_bin_get_by_name(GST_BIN(pipeline), "recsrc");
+        if (!src) { gst_object_unref(pipeline); pipeline = nullptr; return false; }
+        GstCaps *rc = gst_caps_new_simple("video/x-raw",
+            "format", G_TYPE_STRING, "NV12",
+            "width", G_TYPE_INT, FRAME_W,
+            "height", G_TYPE_INT, FRAME_H,
+            "framerate", GST_TYPE_FRACTION, 30, 1, NULL);
+        gst_app_src_set_caps(GST_APP_SRC(src), rc);
+        gst_caps_unref(rc);
+        gst_app_src_set_stream_type(GST_APP_SRC(src), GST_APP_STREAM_TYPE_STREAM);
+        gst_element_set_state(pipeline, GST_STATE_PLAYING);
+        filename = path;
+        return true;
+    }
+
+    void finish() {
+        if (!pipeline) return;
+        if (src) {
+            gst_app_src_end_of_stream(GST_APP_SRC(src));
+            GstBus *bus = gst_element_get_bus(pipeline);
+            gst_bus_timed_pop_filtered(bus, 3 * GST_SECOND,
+                static_cast<GstMessageType>(GST_MESSAGE_EOS | GST_MESSAGE_ERROR));
+            gst_object_unref(bus);
+        }
+        gst_element_set_state(pipeline, GST_STATE_NULL);
+        gst_object_unref(src);
+        gst_object_unref(pipeline);
+        pipeline = nullptr;
+        src = nullptr;
+    }
+};
 
 static void media_configure_cb(GstRTSPMediaFactory *factory, GstRTSPMedia *media, gpointer user_data)
 {
@@ -269,19 +317,25 @@ int main(int argc, char *argv[])
         }
     }).detach();
 
+    // ── 告警 TCP 服务器 ──
+    AlertServer alert_server(alert_port);
+    if (!alert_server.start("alert.key")) {
+        std::cout << "  (cam will run without alert functionality)" << std::endl;
+    }
+
     // ── AI 推理 + 本地显示线程 ──
-    std::thread([sink_ai, local_src]() {
+    std::thread([sink_ai, local_src, &alert_server]() {
         int frame_count = 0;
         auto last_time = std::chrono::steady_clock::now();
 
-        enum RecState : int { REC_IDLE, REC_WARMING, REC_ACTIVE };
-        RecState rec_state = REC_IDLE;
+        std::vector<Recorder> recorders;
+
+        enum AutoRecState : int { AUTO_IDLE, AUTO_WARMING, AUTO_ACTIVE };
+        AutoRecState auto_state = AUTO_IDLE;
         auto warmup_start = std::chrono::steady_clock::time_point{};
-        GstElement *rec_pipeline = nullptr;
-        GstElement *rec_src = nullptr;
-        int rec_frame_idx = 0;
+        auto auto_rec_start = std::chrono::steady_clock::time_point{};
         int normal_count = 0;
-        auto rec_start_time = std::chrono::steady_clock::time_point{};
+        bool prev_abnormal = false;
 
         while (g_running) {
             GstSample *sample = gst_app_sink_pull_sample(GST_APP_SINK(sink_ai));
@@ -414,26 +468,78 @@ int main(int argc, char *argv[])
                     line_y += 20;
                 }
 
-                // ── 录制状态机 ──
+                // ── 告警推送 + 命令处理 + 自动录制 ──
                 bool abnormal = br.violence_alert || br.crouching || br.crowd_alert;
 
+                // ── 告警推送（状态变化时发送）──
+                if (alert_server.has_clients()) {
+                    if (abnormal && !prev_abnormal) {
+                        char buf[256];
+                        std::string types;
+                        if (br.crowd_alert) types += "\"crowd\",";
+                        if (br.crouching) types += "\"crouch\",";
+                        if (br.violence_alert) types += "\"violence\",";
+                        if (!types.empty()) types.pop_back();
+                        snprintf(buf, sizeof(buf),
+                            "{\"event\":\"alert\",\"types\":[%s],\"people\":%d}",
+                            types.c_str(), br.people_count);
+                        alert_server.send_msg(buf);
+                    } else if (!abnormal && prev_abnormal) {
+                        alert_server.send_msg("{\"event\":\"normal\"}");
+                    }
+                }
+                prev_abnormal = abnormal;
+
+                // ── 命令处理 ──
+                {
+                    AlertCommand cmd;
+                    while (alert_server.pop_command(cmd)) {
+                        if (cmd.cmd == "start_record") {
+                            auto now_t = std::chrono::system_clock::now();
+                            auto tt = std::chrono::system_clock::to_time_t(now_t);
+                            char path[128];
+                            strftime(path, sizeof(path), "cmd_%Y%m%d_%H%M%S.mp4", localtime(&tt));
+                            Recorder r;
+                            r.is_auto = false;
+                            if (r.init(path)) {
+                                recorders.push_back(std::move(r));
+                                std::cout << "[CMD] recording started: " << path << std::endl;
+                            }
+                        } else if (cmd.cmd == "stop_record") {
+                            for (int i = (int)recorders.size() - 1; i >= 0; i--) {
+                                if (!recorders[i].is_auto) {
+                                    std::cout << "[CMD] recording stopped: " << recorders[i].filename << std::endl;
+                                    recorders[i].finish();
+                                    recorders.erase(recorders.begin() + i);
+                                    break;
+                                }
+                            }
+                        } else if (cmd.cmd == "get_status") {
+                            char buf[128];
+                            snprintf(buf, sizeof(buf),
+                                "{\"event\":\"status\",\"recorders\":%zu}", recorders.size());
+                            alert_server.send_msg(buf);
+                        }
+                    }
+                }
+
+                // ── 自动录制状态机（仅异常触发）──
                 if (abnormal) {
                     normal_count = 0;
                 } else {
                     normal_count++;
                 }
 
-                switch (rec_state) {
-                case REC_IDLE:
+                switch (auto_state) {
+                case AUTO_IDLE:
                     if (abnormal) {
-                        rec_state = REC_WARMING;
+                        auto_state = AUTO_WARMING;
                         warmup_start = std::chrono::steady_clock::now();
                     }
                     break;
-                case REC_WARMING:
-                    // 连续 ~1s 正常帧 → 取消此次预录
+                case AUTO_WARMING:
                     if (normal_count >= 30) {
-                        rec_state = REC_IDLE;
+                        auto_state = AUTO_IDLE;
                     } else if (abnormal) {
                         auto elapsed = std::chrono::steady_clock::now() - warmup_start;
                         if (elapsed >= std::chrono::seconds(3)) {
@@ -441,76 +547,54 @@ int main(int argc, char *argv[])
                             auto tt = std::chrono::system_clock::to_time_t(now_t);
                             char path[128];
                             strftime(path, sizeof(path), "record_%Y%m%d_%H%M%S.mp4", localtime(&tt));
-
-                            std::string rec_desc = "appsrc name=recsrc ! queue ! videoconvert ! mpph264enc "
-                                                   "! h264parse ! mp4mux ! filesink location=\"" +
-                                                   std::string(path) + "\"";
-
-                            rec_pipeline = gst_parse_launch(rec_desc.c_str(), nullptr);
-                            if (rec_pipeline) {
-                                rec_src = gst_bin_get_by_name(GST_BIN(rec_pipeline), "recsrc");
-                                if (rec_src) {
-                                    GstCaps *rc = gst_caps_new_simple("video/x-raw",
-                                        "format", G_TYPE_STRING, "NV12",
-                                        "width", G_TYPE_INT, FRAME_W,
-                                        "height", G_TYPE_INT, FRAME_H,
-                                        "framerate", GST_TYPE_FRACTION, 30, 1, NULL);
-                                    gst_app_src_set_caps(GST_APP_SRC(rec_src), rc);
-                                    gst_caps_unref(rc);
-                                    gst_app_src_set_stream_type(GST_APP_SRC(rec_src), GST_APP_STREAM_TYPE_STREAM);
-                                    gst_element_set_state(rec_pipeline, GST_STATE_PLAYING);
-                                    rec_frame_idx = 0;
-                                    std::cout << "[REC] started: " << path << std::endl;
-                                } else {
-                                    gst_object_unref(rec_pipeline);
-                                    rec_pipeline = nullptr;
-                                }
+                            Recorder r;
+                            r.is_auto = true;
+                            if (r.init(path)) {
+                                recorders.push_back(std::move(r));
+                                std::cout << "[REC] auto started: " << path << std::endl;
                             }
-                            rec_start_time = std::chrono::steady_clock::now();
-                            rec_state = REC_ACTIVE;
+                            auto_state = AUTO_ACTIVE;
+                            auto_rec_start = std::chrono::steady_clock::now();
                         }
                     }
                     break;
-                case REC_ACTIVE:
-                    // 连续 ~2s 正常帧 且 至少录制了 5s，才停止
+                case AUTO_ACTIVE:
                     if (normal_count >= 60) {
-                        auto rec_elapsed = std::chrono::steady_clock::now() - rec_start_time;
+                        auto rec_elapsed = std::chrono::steady_clock::now() - auto_rec_start;
                         if (rec_elapsed >= std::chrono::seconds(5)) {
-                            if (rec_src) {
-                                gst_app_src_end_of_stream(GST_APP_SRC(rec_src));
-                                GstBus *bus = gst_element_get_bus(rec_pipeline);
-                                gst_bus_timed_pop_filtered(bus, 3 * GST_SECOND,
-                                    static_cast<GstMessageType>(GST_MESSAGE_EOS | GST_MESSAGE_ERROR));
-                                gst_object_unref(bus);
-                                gst_element_set_state(rec_pipeline, GST_STATE_NULL);
-                                gst_object_unref(rec_src);
-                                gst_object_unref(rec_pipeline);
-                                rec_pipeline = nullptr;
-                                rec_src = nullptr;
-                                std::cout << "[REC] stopped" << std::endl;
+                            for (auto it = recorders.begin(); it != recorders.end(); ) {
+                                if (it->is_auto) {
+                                    std::cout << "[REC] auto stopped" << std::endl;
+                                    it->finish();
+                                    it = recorders.erase(it);
+                                } else {
+                                    ++it;
+                                }
                             }
-                            rec_state = REC_IDLE;
+                            auto_state = AUTO_IDLE;
                         } else {
-                            std::cout << "[REC] safety hold: " << std::chrono::duration_cast<std::chrono::seconds>(rec_elapsed).count() << "s" << std::endl;
+                            std::cout << "[REC] safety hold: "
+                                      << std::chrono::duration_cast<std::chrono::seconds>(rec_elapsed).count()
+                                      << "s" << std::endl;
                         }
                     }
                     break;
                 }
 
                 // ── 录制指示器 ──
-                if (rec_state == REC_ACTIVE) {
+                if (!recorders.empty()) {
                     draw_text(&src_img, "REC", FRAME_W - 60, 20, COLOR_RED, 15);
                 }
             } // end if ret==0
 
             gst_buffer_unmap(buf, &info);
 
-            // ── 投递到录制管道 ──
-            if (rec_state == REC_ACTIVE && rec_src) {
+            // ── 投递到各路录制管道 ──
+            for (auto &r : recorders) {
                 GstBuffer *rec_copy = gst_buffer_copy(buf);
-                GST_BUFFER_PTS(rec_copy) = gst_util_uint64_scale(rec_frame_idx++, GST_SECOND, 30);
+                GST_BUFFER_PTS(rec_copy) = gst_util_uint64_scale(r.frame_idx++, GST_SECOND, 30);
                 GST_BUFFER_DURATION(rec_copy) = gst_util_uint64_scale(1, GST_SECOND, 30);
-                gst_app_src_push_buffer(GST_APP_SRC(rec_src), rec_copy);
+                gst_app_src_push_buffer(GST_APP_SRC(r.src), rec_copy);
             }
 
             // ── 投递到本地显示 ──
@@ -534,6 +618,7 @@ int main(int argc, char *argv[])
     g_main_loop_run(loop);
 
     g_running = false;
+    alert_server.stop();
     gst_element_set_state(cam_pipeline, GST_STATE_NULL);
     gst_element_set_state(display_pipeline, GST_STATE_NULL);
     gst_object_unref(cam_pipeline);
