@@ -102,8 +102,9 @@ void AlertServer::send_msg(const std::string &plaintext)
     std::lock_guard<std::mutex> lock(m_clients_mtx);
     for (auto it = m_clients.begin(); it != m_clients.end(); ) {
         ssize_t n = send(*it, header, 4, MSG_NOSIGNAL);
-        if (n > 0) n = send(*it, cipher.data(), cipher.size(), MSG_NOSIGNAL);
-        if (n <= 0) {
+        if (n == 4)
+            n = send(*it, cipher.data(), cipher.size(), MSG_NOSIGNAL);
+        if (n != static_cast<ssize_t>(cipher.size())) {
             close(*it);
             it = m_clients.erase(it);
             std::cout << "[ALERT] client disconnected (send)" << std::endl;
@@ -196,6 +197,9 @@ void AlertServer::client_read_loop(int fd)
             cmd.cmd = "stop_record";
         } else if (plain.find("\"get_status\"") != std::string::npos) {
             cmd.cmd = "get_status";
+        } else if (plain.find("\"sentinel_mode\"") != std::string::npos) {
+            cmd.cmd = "sentinel_mode";
+            cmd.args = plain;
         } else {
             std::cerr << "[ALERT] unknown command: " << plain << std::endl;
             continue;

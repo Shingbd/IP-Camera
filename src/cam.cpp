@@ -56,6 +56,7 @@ rknn_app_context_t g_rknn_ctx;
 object_detect_result_list g_od_results;
 std::atomic<bool> g_running{true};
 std::atomic<bool> g_got_frame{false};
+std::atomic<bool> g_sentinel_mode{false};
 
 int g_skeleton[38] = {16,14, 14,12, 17,15, 15,13, 12,13, 6,12, 7,13, 6,7,
                        6,8, 7,9, 8,10, 9,11, 2,3, 1,2, 1,3, 2,4, 3,5, 4,6, 5,7};
@@ -336,6 +337,7 @@ int main(int argc, char *argv[])
         auto auto_rec_start = std::chrono::steady_clock::time_point{};
         int normal_count = 0;
         bool prev_abnormal = false;
+        bool prev_has_clients = false;
 
         while (g_running) {
             GstSample *sample = gst_app_sink_pull_sample(GST_APP_SINK(sink_ai));
@@ -407,20 +409,20 @@ int main(int argc, char *argv[])
             src_img.size = info.size;
 
             int ret = -1;
-            static bool skip_ai = false;
 
-            if (!skip_ai) {
+            if (g_sentinel_mode) {
                 ret = inference_yolov8_pose_model(&g_rknn_ctx, &src_img, &g_od_results);
                 if (ret != 0) {
                     std::cerr << "AI inference failed, skipping" << std::endl;
-                    skip_ai = true;
                 }
             }
 
             auto t2 = std::chrono::steady_clock::now();
             int infer_ms = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
 
-            if (ret == 0 && !skip_ai) {
+            bool abnormal = false;
+
+            if (ret == 0 && g_sentinel_mode) {
                 char text[256];
                 for (int i = 0; i < g_od_results.count; i++) {
                     object_detect_result *det = &g_od_results.results[i];
@@ -469,11 +471,28 @@ int main(int argc, char *argv[])
                 }
 
                 // ── 告警推送 + 命令处理 + 自动录制 ──
-                bool abnormal = br.violence_alert || br.crouching || br.crowd_alert;
+                abnormal = br.violence_alert || br.crouching || br.crowd_alert;
 
-                // ── 告警推送（状态变化时发送）──
-                if (alert_server.has_clients()) {
-                    if (abnormal && !prev_abnormal) {
+                // ── 告警推送（状态变化时发送 + 新客户端连上时补发）──
+                bool has_clients = alert_server.has_clients();
+                if (has_clients) {
+                    if (!prev_has_clients) {
+                        // 新客户端连上，补发当前状态
+                        if (abnormal) {
+                            char buf[256];
+                            std::string types;
+                            if (br.crowd_alert) types += "\"crowd\",";
+                            if (br.crouching) types += "\"crouch\",";
+                            if (br.violence_alert) types += "\"violence\",";
+                            if (!types.empty()) types.pop_back();
+                            snprintf(buf, sizeof(buf),
+                                "{\"event\":\"alert\",\"types\":[%s],\"people\":%d,"
+                                "\"crouch_conf\":%.2f,\"violence_conf\":%.2f}",
+                                types.c_str(), br.people_count,
+                                br.crouching_conf, br.violence_conf);
+                            alert_server.send_msg(buf);
+                        }
+                    } else if (abnormal && !prev_abnormal) {
                         char buf[256];
                         std::string types;
                         if (br.crowd_alert) types += "\"crowd\",";
@@ -481,49 +500,59 @@ int main(int argc, char *argv[])
                         if (br.violence_alert) types += "\"violence\",";
                         if (!types.empty()) types.pop_back();
                         snprintf(buf, sizeof(buf),
-                            "{\"event\":\"alert\",\"types\":[%s],\"people\":%d}",
-                            types.c_str(), br.people_count);
+                            "{\"event\":\"alert\",\"types\":[%s],\"people\":%d,"
+                            "\"crouch_conf\":%.2f,\"violence_conf\":%.2f}",
+                            types.c_str(), br.people_count,
+                            br.crouching_conf, br.violence_conf);
                         alert_server.send_msg(buf);
                     } else if (!abnormal && prev_abnormal) {
                         alert_server.send_msg("{\"event\":\"normal\"}");
                     }
                 }
                 prev_abnormal = abnormal;
+                prev_has_clients = has_clients;
+            } // end if ret==0 && g_sentinel_mode (AI 绘图 + 告警推送)
 
-                // ── 命令处理 ──
-                {
-                    AlertCommand cmd;
-                    while (alert_server.pop_command(cmd)) {
-                        if (cmd.cmd == "start_record") {
-                            auto now_t = std::chrono::system_clock::now();
-                            auto tt = std::chrono::system_clock::to_time_t(now_t);
-                            char path[128];
-                            strftime(path, sizeof(path), "cmd_%Y%m%d_%H%M%S.mp4", localtime(&tt));
-                            Recorder r;
-                            r.is_auto = false;
-                            if (r.init(path)) {
-                                recorders.push_back(std::move(r));
-                                std::cout << "[CMD] recording started: " << path << std::endl;
-                            }
-                        } else if (cmd.cmd == "stop_record") {
-                            for (int i = (int)recorders.size() - 1; i >= 0; i--) {
-                                if (!recorders[i].is_auto) {
-                                    std::cout << "[CMD] recording stopped: " << recorders[i].filename << std::endl;
-                                    recorders[i].finish();
-                                    recorders.erase(recorders.begin() + i);
-                                    break;
-                                }
-                            }
-                        } else if (cmd.cmd == "get_status") {
-                            char buf[128];
-                            snprintf(buf, sizeof(buf),
-                                "{\"event\":\"status\",\"recorders\":%zu}", recorders.size());
-                            alert_server.send_msg(buf);
+            // ── 命令处理（始终运行，不受哨兵模式影响）──
+            {
+                AlertCommand cmd;
+                while (alert_server.pop_command(cmd)) {
+                    if (cmd.cmd == "start_record") {
+                        auto now_t = std::chrono::system_clock::now();
+                        auto tt = std::chrono::system_clock::to_time_t(now_t);
+                        char path[128];
+                        strftime(path, sizeof(path), "cmd_%Y%m%d_%H%M%S.mp4", localtime(&tt));
+                        Recorder r;
+                        r.is_auto = false;
+                        if (r.init(path)) {
+                            recorders.push_back(std::move(r));
+                            std::cout << "[CMD] recording started: " << path << std::endl;
                         }
+                    } else if (cmd.cmd == "stop_record") {
+                        for (int i = (int)recorders.size() - 1; i >= 0; i--) {
+                            if (!recorders[i].is_auto) {
+                                std::cout << "[CMD] recording stopped: " << recorders[i].filename << std::endl;
+                                recorders[i].finish();
+                                recorders.erase(recorders.begin() + i);
+                                break;
+                            }
+                        }
+                    } else if (cmd.cmd == "get_status") {
+                        char buf[128];
+                        snprintf(buf, sizeof(buf),
+                            "{\"event\":\"status\",\"recorders\":%zu}", recorders.size());
+                        alert_server.send_msg(buf);
+                    } else if (cmd.cmd == "sentinel_mode") {
+                        bool enable = cmd.args.find("\"enable\":true") != std::string::npos;
+                        g_sentinel_mode = enable;
+                        std::cout << "[CMD] sentinel_mode: " << (enable ? "ON" : "OFF")
+                                  << " (args=" << cmd.args << ")" << std::endl;
                     }
                 }
+            }
 
-                // ── 自动录制状态机（仅异常触发）──
+            // ── 自动录制状态机（仅哨兵模式开启且有推理结果时）──
+            if (ret == 0 && g_sentinel_mode) {
                 if (abnormal) {
                     normal_count = 0;
                 } else {
